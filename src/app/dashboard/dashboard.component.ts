@@ -8,7 +8,6 @@ import { register } from 'swiper/element/bundle';
 import { Subject, Subscription } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 
-// Register Swiper custom elements
 register();
 
 @Component({
@@ -21,7 +20,7 @@ register();
 })
 export class DashboardComponent implements OnInit, OnDestroy, AfterViewInit {
   heroes: MarvelCharacter[] = [];
-  filteredHeroes: MarvelCharacter[] = []; // Add this property
+  filteredHeroes: MarvelCharacter[] = [];
   searchTerm: string = '';
   private searchSubject = new Subject<string>();
   private searchSubscription?: Subscription;
@@ -79,18 +78,15 @@ export class DashboardComponent implements OnInit, OnDestroy, AfterViewInit {
 
   private setupScrollHandler(): void {
     document.addEventListener('scroll', () => {
-      // Remover clase hide-scrollbar
       document.body.classList.remove('hide-scrollbar');
       
-      // Limpiar timer existente
       if (this.scrollTimer) {
         clearTimeout(this.scrollTimer);
       }
       
-      // Configurar nuevo timer
       this.scrollTimer = setTimeout(() => {
         document.body.classList.add('hide-scrollbar');
-      }, 1000); // Desaparece después de 1 segundo de inactividad
+      }, 1000);
     }, { passive: true });
   }
 
@@ -102,7 +98,6 @@ export class DashboardComponent implements OnInit, OnDestroy, AfterViewInit {
     const swiperEl = document.querySelector('swiper-container');
     if (swiperEl) {
       Object.assign(swiperEl, this.swiperConfig);
-      // @ts-ignore
       swiperEl.initialize();
     }
   }
@@ -141,19 +136,18 @@ export class DashboardComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   onBlur(): void {
-    // Delay hiding suggestions to allow click events to fire
     setTimeout(() => {
       this.showSuggestions = false;
     }, 200);
   }
 
   getRandomHeroes(): void {
-    this.marvelService.getCharacters(0, 12) // Aumentamos a 12 héroes
+    this.marvelService.getCharacters(0, 12)
       .subscribe({
         next: (heroes) => {
           this.heroes = heroes;
-          this.filteredHeroes = heroes; // Update filtered heroes
-          console.log('Heroes loaded:', this.heroes); // Para debug
+          this.filteredHeroes = heroes;
+          console.log('Heroes loaded:', this.heroes);
         },
         error: (error) => {
           console.error('Error loading heroes:', error);
@@ -166,7 +160,6 @@ export class DashboardComponent implements OnInit, OnDestroy, AfterViewInit {
     event?.stopPropagation();
     console.log('Navegando al héroe:', id);
     
-    // Usar timeout para asegurar que la navegación ocurre después de que todos los eventos se han completado
     setTimeout(() => {
       this.router.navigate(['detail', id])
         .then(() => console.log('Navegación exitosa'))
@@ -177,7 +170,7 @@ export class DashboardComponent implements OnInit, OnDestroy, AfterViewInit {
   selectHero(hero: MarvelCharacter): void {
     this.searchTerm = hero.name;
     this.showSuggestions = false;
-    this.filteredHeroes = [hero]; // Update filtered heroes
+    this.filteredHeroes = [hero];
     this.goToDetail(hero.id);
   }
 

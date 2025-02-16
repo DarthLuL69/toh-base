@@ -1,14 +1,39 @@
+<main class="main-container">
+  <div class="dashboard">
+    <h2>Top Heroes</h2>
+    
+    <div class="search-container">
+      <input 
+        [(ngModel)]="searchTerm"
+        (input)="onSearchInput(searchTerm)"
+        type="text" 
+        placeholder="Search heroes...">
+      
+      <div class="suggestions-dropdown" *ngIf="showSuggestions">
+        <div *ngFor="let hero of suggestions" 
+             (click)="selectHero(hero)"
+             class="suggestion-item">
+          <img [src]="hero.thumbnail.path + '.' + hero.thumbnail.extension" [alt]="hero.name">
+          <span>{{hero.name}}</span>
+        </div>
+      </div>
+    </div>
 
-
-<h2>Top 5 Heroes</h2>
-<div class="heroes-menu">
-    @if (heroes) {
-    @for (hero of heroes; track hero.id) {
-    <a routerLink="/hero/{{hero.id}}">
-        {{hero.name}}
-    </a>
-    }
-    }
-</div>
-
-<app-hero-search></app-hero-search>
+    <div class="swiper-container">
+      <swiper-container [init]="false" [config]="swiperConfig">
+        <swiper-slide *ngFor="let hero of filteredHeroes">
+          <div class="hero-card" (click)="$event.preventDefault(); goToDetail(hero.id)">
+            <img 
+              [src]="hero.thumbnail.path + '.' + hero.thumbnail.extension" 
+              [alt]="hero.name"
+              (error)="handleImageError($event)">
+            <div class="hero-info">
+              <h3>{{hero.name}}</h3>
+              <span class="view-details">View Details</span>
+            </div>
+          </div>
+        </swiper-slide>
+      </swiper-container>
+    </div>
+  </div>
+</main>

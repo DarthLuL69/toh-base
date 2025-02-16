@@ -1,32 +1,32 @@
 import { Component, OnInit } from '@angular/core';
-import { Hero } from '../hero.interface';
-import { FormsModule } from '@angular/forms';
-import { HeroService } from '../hero.service';
-import { CommonModule, Location } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
+import { Location, CommonModule } from '@angular/common';
+import { MarvelService } from '../marvel.service';
+import { MarvelCharacter } from '../marvel-api.interface';
 
 @Component({
   selector: 'app-hero-detail',
-  imports: [FormsModule, CommonModule],
+  standalone: true,
+  imports: [CommonModule],
   templateUrl: './hero-detail.component.html',
-  styleUrl: './hero-detail.component.scss'
+  styleUrls: ['./hero-detail.component.scss']
 })
 export class HeroDetailComponent implements OnInit {
-  hero: Hero | undefined;
+  hero?: MarvelCharacter;
 
   constructor(
     private route: ActivatedRoute,
-    private heroService: HeroService,
+    private marvelService: MarvelService,
     private location: Location
   ) {}
 
   ngOnInit(): void {
-    this.getHero();
+    this.loadHero();
   }
 
-  getHero(): void {
-    const id = parseInt(this.route.snapshot.paramMap.get('id')!, 10);
-    this.heroService.getHero(id)
+  loadHero(): void {
+    const id = Number(this.route.snapshot.paramMap.get('id'));
+    this.marvelService.getCharacter(id)
       .subscribe(hero => this.hero = hero);
   }
 

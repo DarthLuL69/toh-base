@@ -1,92 +1,110 @@
 /* HeroesComponent's private CSS styles */
-.heroes {
-    margin: 0 0 2em 0;
-    list-style-type: none;
-    padding: 0;
-    width: 15em;
-  }
-  
-  input {
-    display: block;
-    width: 100%;
-    padding: .5rem;
-    margin: 1rem 0;
-    box-sizing: border-box;
-  }
-  
-  .heroes li {
-    position: relative;
-    cursor: pointer;
-  }
-  
-  .heroes li:hover {
-    left: .1em;
-  }
-  
-  .heroes a {
-    color: #333;
-    text-decoration: none;
-    background-color: #EEE;
-    margin: .5em;
-    padding: .3em 0;
-    height: 1.6em;
-    border-radius: 4px;
-    display: block;
-    width: 100%;
-  }
-  
-  .heroes a:hover {
-    color: #2c3a41;
-    background-color: #e6e6e6;
-  }
-  
-  .heroes a:active {
-    background-color: #525252;
-    color: #fafafa;
-  }
-  
-  .heroes .badge {
-    display: inline-block;
-    font-size: small;
-    color: white;
-    padding: 0.8em 0.7em 0 0.7em;
-    background-color: #405061;
-    line-height: 1em;
-    position: relative;
-    left: -1px;
-    top: -4px;
-    height: 1.8em;
-    min-width: 16px;
-    text-align: right;
-    margin-right: .8em;
-    border-radius: 4px 0 0 4px;
-  }
-  
-  .add-button {
-   padding: .5rem 1.5rem;
-   font-size: 1rem;
-   margin-bottom: 2rem;
-  }
-  
-  .add-button:hover {
-    color: white;
-    background-color: #42545C;
-  }
-  
-  button.delete {
-    position: absolute;
-    left: 210px;
-    top: 5px;
-    background-color: white;
-    color:  #525252;
-    font-size: 1.1rem;
-    margin: 0;
-    padding: 1px 10px 3px 10px;
-  }
-  
-  button.delete:hover {
-    background-color: #525252;
-    color: white;
-  }
-  
-  
+
+h2 {
+  text-align: center;
+  color: #ed1d24;
+  font-size: 2.5em;
+  margin-bottom: 20px;
+}
+
+.heroes-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 400px;
+}
+
+.heroes-list {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  width: 80%;
+  max-width: 600px;
+  border: 2px solid #555;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+}
+
+.hero-item {
+  background-color: rgba(0, 0, 0, 0.7);
+  border-bottom: 1px solid #555;
+  padding: 20px;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.hero-item:last-child {
+  border-bottom: none;
+}
+
+.hero-item:hover {
+  background-color: rgba(0, 0, 0, 0.8);
+  transform: scale(1.02);
+}
+
+.hero-item a {
+  text-decoration: none;
+  color: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: color 0.3s ease;
+}
+
+.hero-item a:hover {
+  color: #ed1d24;
+}
+
+.hero-id {
+  font-weight: bold;
+  color: #ed1d24;
+  font-size: 1.2em;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.hero-name {
+  font-size: 1.4em;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.pagination {
+  margin-top: 30px;
+  text-align: center;
+}
+
+.pagination-button {
+  margin: 0 15px;
+  padding: 12px 24px;
+  font-size: 18px;
+  border: none;
+  background-color: #ed1d24;
+  color: white;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.pagination-button:hover {
+  background-color: #c6141a;
+  transform: scale(1.05);
+}
+
+.pagination-button:disabled {
+  background-color: #666;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+.page-info {
+  font-size: 1.4em;
+  color: #fff;
+  margin: 0 30px;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.arrow {
+  font-size: 1.5em;
+  vertical-align: middle;
+}
+

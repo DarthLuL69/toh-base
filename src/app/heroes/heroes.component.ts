@@ -1,25 +1,64 @@
 import { Component, OnInit } from '@angular/core';
-import { HeroService } from '../hero.service';
-import { Hero } from '../hero.interface';
+import { MarvelService } from '../marvel.service';
+import { MarvelCharacter } from '../marvel-api.interface';
 import { RouterModule } from '@angular/router';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-heroes',
-  imports: [RouterModule],
+  standalone: true,
+  imports: [RouterModule, CommonModule],
   templateUrl: './heroes.component.html',
-  styleUrl: './heroes.component.scss'
+  styleUrls: ['./heroes.component.scss']
 })
 export class HeroesComponent implements OnInit {
-  public heroes: Hero[] = [];
+  characters: MarvelCharacter[] = [];
+  currentPage = 0;
+  itemsPerPage = 20;
 
-
-  constructor(
-    private heroService: HeroService
-  ) {
-
-  }
+  constructor(private marvelService: MarvelService) {}
 
   ngOnInit(): void {
-    this.heroService.getHeroes().subscribe(heroes => this.heroes = heroes);
+    this.loadHeroes();
+  }
+
+  loadHeroes(): void {
+    const offset = this.currentPage * this.itemsPerPage;
+    this.marvelService.getCharacters(offset, this.itemsPerPage)
+      .subscribe({
+        next: (response) => {
+          this.characters = response;
+          console.log('Heroes loaded:', this.characters); // Para depuración
+        },
+        error: (error) => {
+          console.error('Error loading heroes:', error);
+        }
+      });
+  }
+
+  trackById(index: number, hero: MarvelCharacter): number {
+    return hero.id;
+  }
+
+  getTotalPages(): number {
+    return Math.ceil(100 / this.itemsPerPage); // Ajusta según el total real de héroes
+  }
+
+  isLastPage(): boolean {
+    return this.currentPage >= this.getTotalPages() - 1;
+  }
+
+  nextPage(): void {
+    if (!this.isLastPage()) {
+      this.currentPage++;
+      this.loadHeroes();
+    }
+  }
+
+  previousPage(): void {
+    if (this.currentPage > 0) {
+      this.currentPage--;
+      this.loadHeroes();
+    }
   }
 }

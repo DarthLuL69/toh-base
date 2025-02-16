@@ -1,55 +1,228 @@
 /* DashboardComponent's private CSS styles */
 
+@use 'swiper/scss' as swiper;
+@use 'swiper/scss/navigation';
+@use 'swiper/scss/pagination';
+
+.main-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.dashboard {
+  padding: 20px;
+  text-align: center;
+}
+
 h2 {
-    text-align: center;
-  }
-  
-  .heroes-menu {
-    padding: 0;
-    margin: auto;
-    max-width: 1000px;
-  
-    /* flexbox */
-    display: -webkit-box;
-    display: -moz-box;
-    display: -ms-flexbox;
-    display: -webkit-flex;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    align-content: flex-start;
-    align-items: flex-start;
-  }
-  
-  a {
-    background-color: #3f525c;
-    border-radius: 2px;
-    padding: 1rem;
-    font-size: 1.2rem;
-    text-decoration: none;
-    display: inline-block;
-    color: #fff;
-    text-align: center;
+  color: #ed1d24;
+  font-size: 2.5em;
+  margin: 30px 0;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.search-container {
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto 40px;
+  position: relative;
+
+  input {
     width: 100%;
-    min-width: 70px;
-    margin: .5rem auto;
-    box-sizing: border-box;
-  
-    /* flexbox */
-    order: 0;
-    flex: 0 1 auto;
-    align-self: auto;
-  }
-  
-  @media (min-width: 600px) {
-    a {
-      width: 18%;
-      box-sizing: content-box;
+    padding: 15px;
+    border: 2px solid #333;
+    border-radius: 8px;
+    background-color: #222;
+    color: #fff;
+    font-size: 1.2em;
+    text-align: center;
+    transition: border-color 0.3s ease;
+
+    &:focus {
+      border-color: #ed1d24;
+      outline: none;
     }
   }
-  
-  a:hover {
-    background-color: black;
+}
+
+.suggestions-dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.9);
+  border: 1px solid #333;
+  border-radius: 0 0 8px 8px;
+  max-height: 300px;
+  overflow-y: auto;
+  z-index: 1000;
+
+  &::-webkit-scrollbar {
+    width: 6px;
+    background-color: transparent;
   }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+    margin: 3px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    border: 2px solid transparent;
+    background-clip: padding-box;
+    opacity: 0;
+    animation: fadeInScroll 0.5s forwards;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background: rgba(237, 29, 36, 0.6);
+  }
+
+  /* Firefox */
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
+
+  &:hover {
+    scrollbar-color: rgba(237, 29, 36, 0.6) transparent;
+  }
+}
+
+.suggestion-item {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+
+  &:hover {
+    background-color: rgba(237, 29, 36, 0.2);
+  }
+
+  img {
+    width: 40px;
+    height: 40px;
+    border-radius: 4px;
+    margin-right: 10px;
+    object-fit: cover;
+  }
+
+  span {
+    color: white;
+  }
+}
+
+.swiper-container {
+  padding: 20px 0;
+  position: relative;
+  margin: 0 60px; // Añadir margen para las flechas
   
+  swiper-container {
+    padding: 20px;
+  }
+
+  .hero-card {
+    background-color: rgba(0, 0, 0, 0.7);
+    border-radius: 12px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    width: 220px;
+    height: 400px; // Ajustar altura para mejor visualización
+    margin: 0 auto;
+    transition: transform 0.3s ease;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+    }
+
+    .hero-info {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 20px;
+      background: linear-gradient(transparent, rgba(0, 0, 0, 0.9));
+      transform: translateY(100%);
+      transition: transform 0.3s ease;
+
+      h3 {
+        color: white;
+        margin: 0 0 10px 0;
+        font-size: 1.2em;
+      }
+
+      .view-details {
+        color: #ed1d24;
+        font-weight: bold;
+        font-size: 0.9em;
+      }
+    }
+
+    &:hover {
+      transform: translateY(-5px);
+
+      img {
+        transform: scale(1.1);
+      }
+
+      .hero-info {
+        transform: translateY(0);
+      }
+    }
+  }
+}
+
+// Estilos para los botones de navegación del Swiper
+:host ::ng-deep {
+  .swiper-button-next,
+  .swiper-button-prev {
+    color: #ed1d24;
+    background: rgba(0, 0, 0, 0.7);
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    
+    &:after {
+      font-size: 20px;
+      font-weight: bold;
+    }
+    
+    &:hover {
+      background: rgba(237, 29, 36, 0.9);
+      color: white;
+    }
+  }
+
+  .swiper-button-prev {
+    left: 10px;
+  }
+
+  .swiper-button-next {
+    right: 10px;
+  }
+
+  // Ajustar posición de los puntos de paginación
+  .swiper-pagination {
+    position: relative;
+    bottom: -20px; // Mover puntos más abajo
+    margin-top: 20px; // Añadir espacio adicional arriba
+  }
+
+  .swiper-pagination-bullet {
+    background: white;
+    opacity: 0.5;
+    margin: 0 5px; // Espaciado entre puntos
+
+    &-active {
+      opacity: 1;
+      background: #ed1d24;
+    }
+  }
+}
+

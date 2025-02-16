@@ -1,1 +1,130 @@
+@use 'swiper/scss' as swiper;
+@use 'swiper/scss/navigation';
+@use 'swiper/scss/pagination';
+
 /* You can add global styles to this file, and also import other style files */
+
+/* Global styles */
+/* Estilos globales básicos */
+body {
+  background: url('./Fondo.jpg') no-repeat center center fixed;
+  background-size: cover;
+  margin: 0;
+  font-family: Arial, sans-serif;
+  color: #fff;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: inherit;
+  filter: blur(10px);
+  z-index: -1;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: #ed1d24;
+  font-family: 'Bebas Neue', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+a {
+  color: #ed1d24;
+  text-decoration: none;
+  transition: color 0.3s ease;
+  
+  &:hover {
+    text-decoration: underline;
+    color: #ffffff;
+  }
+}
+
+button {
+  background-color: #ed1d24;
+  color: #ffffff;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  text-transform: uppercase;
+  transition: all 0.3s ease;
+
+  &:hover {
+    background-color: #c6141a;
+    transform: scale(1.05);
+  }
+}
+
+input[type="text"] {
+  padding: 10px;
+  border: 2px solid #333;
+  border-radius: 4px;
+  background-color: #222;
+  color: #fff;
+  font-size: 16px;
+  transition: border-color 0.3s ease;
+
+  &:focus {
+    border-color: #ed1d24;
+    outline: none;
+  }
+}
+
+/* Estilos personalizados para la barra de scroll */
+::-webkit-scrollbar {
+  width: 8px;
+  background-color: transparent;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+  margin: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+  border: 2px solid transparent;
+  background-clip: padding-box;
+  transition: background 0.3s ease;
+  opacity: 0;
+  animation: fadeInScroll 0.5s forwards;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(237, 29, 36, 0.6);
+  border: 2px solid transparent;
+  background-clip: padding-box;
+}
+
+/* Animación para la aparición/desaparición del scroll */
+@keyframes fadeInScroll {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
+  
+  &:hover {
+    scrollbar-color: rgba(237, 29, 36, 0.6) transparent;
+  }
+}
+
+/* Clase para ocultar el scrollbar cuando no está en uso */
+.hide-scrollbar::-webkit-scrollbar-thumb {
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}

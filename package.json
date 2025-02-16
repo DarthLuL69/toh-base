@@ -19,7 +19,10 @@
     "@angular/platform-browser-dynamic": "^19.0.0",
     "@angular/router": "^19.0.0",
     "json-server": "^1.0.0-beta.3",
+    "ngx-owl-carousel-o": "^19.0.0",
+    "ngx-swiper-wrapper": "^10.0.0",
     "rxjs": "~7.8.0",
+    "swiper": "^11.2.4",
     "tslib": "^2.3.0",
     "zone.js": "~0.15.0"
   },

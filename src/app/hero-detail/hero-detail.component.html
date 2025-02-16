@@ -1,13 +1,25 @@
-@if (hero) {
-<div>
-    <h2>{{hero.name | uppercase}} Details</h2>
-    <div><span>id: </span>{{hero.id}}</div>
-    <div>
-        <label for="hero-name">Hero name: </label>
-        <input id="hero-name" [(ngModel)]="hero.name" placeholder="Hero name" />
+<div class="hero-detail" *ngIf="hero">
+  <button (click)="goBack()" class="back-button">
+    <i class="fas fa-arrow-left"></i> Back
+  </button>
+  
+  <div class="hero-info">
+    <img [src]="hero.thumbnail.path + '.' + hero.thumbnail.extension" [alt]="hero.name">
+    <div class="hero-text">
+      <h2>{{hero.name}}</h2>
+      <p class="description" *ngIf="hero.description">{{hero.description}}</p>
+      <p class="description" *ngIf="!hero.description">No description available.</p>
+      
+      <div class="hero-stats" *ngIf="hero.comics">
+        <h3>Stats</h3>
+        <p>Comics: {{hero.comics.available}}</p>
+        <p>Series: {{hero.series.available}}</p>
+        <p>Stories: {{hero.stories.available}}</p>
+      </div>
     </div>
-    <button type="button" (click)="goBack()">go back</button>
+  </div>
 </div>
-} @else {
-<h1>NO SE HA ENCONTRADO EL HÉROE</h1>
-}
+
+<div *ngIf="!hero">
+  <h2>Hero not found</h2>
+</div>

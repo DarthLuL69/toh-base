@@ -2,10 +2,6 @@
 @use 'swiper/scss/navigation';
 @use 'swiper/scss/pagination';
 
-/* You can add global styles to this file, and also import other style files */
-
-/* Global styles */
-/* Estilos globales básicos */
 body {
   background: url('./Fondo.jpg') no-repeat center center fixed;
   background-size: cover;
@@ -76,7 +72,6 @@ input[type="text"] {
   }
 }
 
-/* Estilos personalizados para la barra de scroll */
 ::-webkit-scrollbar {
   width: 8px;
   background-color: transparent;
@@ -103,7 +98,6 @@ input[type="text"] {
   background-clip: padding-box;
 }
 
-/* Animación para la aparición/desaparición del scroll */
 @keyframes fadeInScroll {
   from {
     opacity: 0;
@@ -113,7 +107,6 @@ input[type="text"] {
   }
 }
 
-/* Firefox */
 * {
   scrollbar-width: thin;
   scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
@@ -123,7 +116,6 @@ input[type="text"] {
   }
 }
 
-/* Clase para ocultar el scrollbar cuando no está en uso */
 .hide-scrollbar::-webkit-scrollbar-thumb {
   opacity: 0;
   transition: opacity 0.3s ease;

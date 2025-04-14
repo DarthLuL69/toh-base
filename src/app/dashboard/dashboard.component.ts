@@ -119,8 +119,6 @@ export class DashboardComponent implements OnInit, OnDestroy, AfterViewInit {
         .subscribe(heroes => {
           this.suggestions = heroes;
           this.showSuggestions = true;
-        }, error => {
-          console.error('Error fetching suggestions:', error);
         });
     } else {
       this.suggestions = [];
